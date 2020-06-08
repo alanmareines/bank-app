@@ -1,5 +1,6 @@
-import 'package:banking_app/views/sign_in.dart';
 import 'package:banking_app/views/transaction_screen.dart';
+import 'package:banking_app/views/pix_pay.dart';
+import 'package:banking_app/views/info.dart';
 import 'package:flutter/material.dart';
 import 'package:banking_app/constants.dart';
 import 'home.dart';
@@ -21,9 +22,8 @@ class _ScreenIndexState extends State<ScreenIndex> {
       accountBalance: '20.000,00',
       accountId: 'alanmareines@gmail.com',
     ),
-    SignInScreen(),
-    Scaffold(),
-    Scaffold(),
+    PixPayScreen(),
+    InfoScreen(),
   ];
   int _currentIndex = 0;
 

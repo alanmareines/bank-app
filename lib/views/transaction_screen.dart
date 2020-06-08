@@ -16,10 +16,12 @@ class TransactionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sua Carteira')),
       body: Column(
         children: <Widget>[
-          Jumbotron(accountId: accountId, accountBalance: accountBalance),
+          Jumbotron(
+              accountId: accountId,
+              accountBalance: accountBalance,
+              title: 'Sua Carteira'),
           Container(
             padding: EdgeInsets.only(left: 5.00),
             height: 105.00,
