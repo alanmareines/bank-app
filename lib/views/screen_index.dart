@@ -1,36 +1,3 @@
-// import 'package:banking_app/constants.dart';
-// import 'package:flutter/material.dart';
-
-// class BottomNavBar extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return BottomAppBar(
-//       color: Colors.white,
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//         children: <Widget>[
-//           IconButton(
-//             icon: Icon(Icons.home, color: kPrimaryColor),
-//             onPressed: () {},
-//           ),
-//           IconButton(
-//             icon: Icon(Icons.account_balance_wallet, color: kPrimaryColor),
-//             onPressed: () {},
-//           ),
-//           IconButton(
-//             icon: Icon(Icons.repeat, color: kPrimaryColor),
-//             onPressed: () {},
-//           ),
-//           IconButton(
-//             icon: Icon(Icons.camera_alt, color: kPrimaryColor),
-//             onPressed: () {},
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 import 'package:banking_app/views/sign_in.dart';
 import 'package:banking_app/views/transaction_screen.dart';
 import 'package:flutter/material.dart';

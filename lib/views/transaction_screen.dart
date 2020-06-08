@@ -1,5 +1,6 @@
 import 'package:banking_app/components/jumbotron.dart';
 import 'package:banking_app/components/transaction.dart';
+import 'package:banking_app/components/service.dart';
 import 'package:flutter/material.dart';
 
 class TransactionScreen extends StatelessWidget {
@@ -19,9 +20,23 @@ class TransactionScreen extends StatelessWidget {
       body: Column(
         children: <Widget>[
           Jombotron(accountId: accountId, accountBalance: accountBalance),
+          Container(
+            padding: EdgeInsets.only(left: 5.00),
+            height: 105.00,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                Service(title: 'Depositar', icon: Icons.play_for_work),
+                Service(title: 'Pagar', icon: Icons.attach_money),
+                Service(title: 'Investimento', icon: Icons.insert_chart),
+                Service(title: 'Extrato', icon: Icons.receipt),
+                Service(title: 'Contatos', icon: Icons.account_box),
+                Service(title: 'Informações', icon: Icons.info),
+              ],
+            ),
+          ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(top: 10.0),
               decoration: BoxDecoration(
                   borderRadius:
                       BorderRadius.vertical(top: Radius.circular(15.0)),
@@ -29,7 +44,7 @@ class TransactionScreen extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(
+                    padding: EdgeInsets.only(
                         top: 25.0, left: 15.0, right: 15.0, bottom: 5.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,11 +70,11 @@ class TransactionScreen extends StatelessWidget {
                   Transaction(
                       counterParty: "Wellington Barbosa",
                       amount: "100,00",
-                      date: "29/01/2020"),
+                      date: "14/03/2020"),
                   Transaction(
                       counterParty: "Márcio Castro",
                       amount: "-120,00",
-                      date: "29/01/2020"),
+                      date: "17/02/2020"),
                   Transaction(
                       counterParty: "Murilo Rabusky",
                       amount: "2.309,00",
@@ -67,11 +82,11 @@ class TransactionScreen extends StatelessWidget {
                   Transaction(
                       counterParty: "Wellington Barbosa",
                       amount: "-132,23",
-                      date: "29/01/2020"),
+                      date: "26/01/2020"),
                   Transaction(
                       counterParty: "Márcio Castro",
                       amount: "29,00",
-                      date: "29/01/2020"),
+                      date: "20/01/2020"),
                 ],
               ),
             ),
