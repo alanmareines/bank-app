@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Banking App',
       theme: ThemeData(
         primaryColor: kPrimaryColor,
-        scaffoldBackgroundColor: Color(0xFF97b2ed),
+        scaffoldBackgroundColor: Color(0xffc9ccf6),
         accentColor: kAccentColor,
         fontFamily: 'Poppins',
         textTheme: TextTheme(
