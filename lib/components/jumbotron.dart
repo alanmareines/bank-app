@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:banking_app/constants.dart';
 
-class Jombotron extends StatelessWidget {
-  const Jombotron({
+class Jumbotron extends StatelessWidget {
+  const Jumbotron({
     Key key,
     @required this.accountId,
     @required this.accountBalance,

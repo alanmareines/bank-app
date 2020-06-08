@@ -2,6 +2,7 @@ import 'package:banking_app/views/sign_in.dart';
 import 'package:banking_app/views/transaction_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:banking_app/constants.dart';
+import 'home.dart';
 
 class ScreenIndex extends StatefulWidget {
   @override
@@ -10,13 +11,17 @@ class ScreenIndex extends StatefulWidget {
 
 class _ScreenIndexState extends State<ScreenIndex> {
   final List _screens = [
+    HomeScreen(
+      userName: 'Alan Mareines',
+      accountBalance: '20.000,00',
+      accountId: 'alanmareines@gmail.com',
+    ),
     TransactionScreen(
       userName: 'Alan Mareines',
       accountBalance: '20.000,00',
       accountId: 'alanmareines@gmail.com',
     ),
     SignInScreen(),
-    Scaffold(),
     Scaffold(),
     Scaffold(),
   ];

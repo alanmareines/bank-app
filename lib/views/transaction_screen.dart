@@ -16,10 +16,10 @@ class TransactionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Olá, $userName')),
+      appBar: AppBar(title: Text('Sua Carteira')),
       body: Column(
         children: <Widget>[
-          Jombotron(accountId: accountId, accountBalance: accountBalance),
+          Jumbotron(accountId: accountId, accountBalance: accountBalance),
           Container(
             padding: EdgeInsets.only(left: 5.00),
             height: 105.00,
@@ -67,26 +67,33 @@ class TransactionScreen extends StatelessWidget {
                     indent: 20.0,
                     endIndent: 20.0,
                   ),
-                  Transaction(
-                      counterParty: "Wellington Barbosa",
-                      amount: "100,00",
-                      date: "14/03/2020"),
-                  Transaction(
-                      counterParty: "Márcio Castro",
-                      amount: "-120,00",
-                      date: "17/02/2020"),
-                  Transaction(
-                      counterParty: "Murilo Rabusky",
-                      amount: "2.309,00",
-                      date: "29/01/2020"),
-                  Transaction(
-                      counterParty: "Wellington Barbosa",
-                      amount: "-132,23",
-                      date: "26/01/2020"),
-                  Transaction(
-                      counterParty: "Márcio Castro",
-                      amount: "29,00",
-                      date: "20/01/2020"),
+                  Expanded(
+                    child: ListView(
+                      scrollDirection: Axis.vertical,
+                      children: <Widget>[
+                        Transaction(
+                            counterParty: "Wellington Barbosa",
+                            amount: "100,00 R\$",
+                            date: "14/03/2020"),
+                        Transaction(
+                            counterParty: "Márcio Castro",
+                            amount: "-120,00 R\$",
+                            date: "17/02/2020"),
+                        Transaction(
+                            counterParty: "Murilo Rabusky",
+                            amount: "2.309,00 R\$",
+                            date: "29/01/2020"),
+                        Transaction(
+                            counterParty: "Wellington Barbosa",
+                            amount: "-132,23 R\$",
+                            date: "26/01/2020"),
+                        Transaction(
+                            counterParty: "Márcio Castro",
+                            amount: "29,00 R\$",
+                            date: "20/01/2020"),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
