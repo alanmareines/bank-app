@@ -1,5 +1,6 @@
 import 'package:banking_app/components/credit_cards.dart';
 import 'package:banking_app/components/jumbotron.dart';
+import 'package:banking_app/components/chart.dart';
 import 'package:banking_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -56,49 +57,86 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Olá, $userName')),
-      body: Column(
-        children: <Widget>[
-          Jumbotron(accountId: accountId, accountBalance: accountBalance),
-          SizedBox(height: 5.0),
-          Container(
-            child: Column(
+      body: Container(
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          children: <Widget>[
+            Column(
               children: <Widget>[
-                CarouselSlider(
-                  options: CarouselOptions(
-                    height: 120,
-                    viewportFraction: 0.50,
-                    autoPlay: false,
-                    enlargeCenterPage: true,
+                Jumbotron(accountId: accountId, accountBalance: accountBalance),
+                SizedBox(height: 5.0),
+                Container(
+                  child: Column(
+                    children: <Widget>[
+                      CarouselSlider(
+                        options: CarouselOptions(
+                          height: 120,
+                          viewportFraction: 0.50,
+                          autoPlay: false,
+                          enlargeCenterPage: true,
+                        ),
+                        items: imageSliders,
+                      ),
+                    ],
                   ),
-                  items: imageSliders,
+                ),
+                SizedBox(height: 5.0),
+                AccountChart(),
+                Container(
+                  height: 200,
+                  margin: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Flexible(
+                          flex: 2,
+                          child: Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  'Pagamentos Instantâneos disponível',
+                                  softWrap: true,
+                                  overflow: TextOverflow.clip,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                      color: Colors.grey[800], fontSize: 22.0),
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Text(
+                                      'Experimente ',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                          color: Colors.grey[800],
+                                          fontSize: 18.0),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 20,
+                                      color: Colors.grey[600],
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Flexible(flex: 1, child: kPixLogo),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
-          ),
-          SizedBox(height: 5.0),
-          Container(
-              height: 200,
-              margin: EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Row(
-                  children: <Widget>[
-                    kPixLogo,
-                    Text(
-                      'A nova forma de pagar e economizar',
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.grey[800]),
-                    ),
-                  ],
-                ),
-              )),
-          Container(height: 200, color: Colors.purple),
-        ],
+          ],
+        ),
       ),
     );
   }
