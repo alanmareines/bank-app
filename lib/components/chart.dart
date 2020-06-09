@@ -19,7 +19,7 @@ class AccountChartState extends State<AccountChart> {
       aspectRatio: 1,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        color: const Color(0xfff5f5ff),
+        color: const Color(0xffffffff),
         child: Stack(
           children: <Widget>[
             Padding(

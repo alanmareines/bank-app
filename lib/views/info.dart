@@ -22,13 +22,13 @@ class _InfoScreenState extends State<InfoScreen> {
       slivers: <Widget>[
         SliverAppBar(
           backgroundColor: kPrimaryColor,
-          title: kCustomAppBar('oi'),
+          title: kCustomAppBar('Informações'),
           pinned: true,
           expandedHeight: 210.0,
           flexibleSpace: FlexibleSpaceBar(
             background: Jumbotron(
-              accountBalance: '200.00',
-              accountId: 'alanmareines@gmail.com',
+              accountBalance: 'accountBalance',
+              accountId: 'accountId',
             ),
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:banking_app/views/screen_index.dart';
 import 'package:flutter/material.dart';
 import 'package:banking_app/components/primary_button.dart';
+import 'package:banking_app/constants.dart';
 
 // Define a custom Form widget.
 class SignInForm extends StatefulWidget {
@@ -12,6 +13,8 @@ class SignInForm extends StatefulWidget {
 
 class SignInFormState extends State<SignInForm> {
   final _signInKey = GlobalKey<FormState>();
+  String userName = "";
+  String password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,10 @@ class SignInFormState extends State<SignInForm> {
         key: _signInKey,
         child: Column(children: <Widget>[
           TextFormField(
+            style: TextStyle(color: kPrimaryColor),
             decoration: const InputDecoration(
+              icon: Icon(Icons.account_circle,
+                  size: 35.0, color: Color(0xFF0f2263)),
               hintText: 'Sua conta',
             ),
             validator: (value) {
@@ -33,7 +39,11 @@ class SignInFormState extends State<SignInForm> {
             height: 10.00,
           ),
           TextFormField(
+            style: TextStyle(color: kPrimaryColor),
+            obscureText: true,
             decoration: const InputDecoration(
+              icon: Icon(Icons.enhanced_encryption,
+                  size: 35.0, color: Color(0xFF0f2263)),
               hintText: 'Sua Senha',
             ),
             validator: (value) {

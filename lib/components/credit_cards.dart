@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class CreditCard extends StatelessWidget {
   CreditCard(
-      {@required this.color,
+      {@required this.gradient,
       @required this.brand,
       @required this.number,
       this.userName});
 
-  final Color color;
+  final List<Color> gradient;
   final String brand;
   final String number;
   final String userName;
@@ -15,13 +15,18 @@ class CreditCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            color: color),
-        width: 220,
-        height: 110,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
+      width: 240,
+      height: 110,
+      child: Card(
+        semanticContainer: true,
+        elevation: 7,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        child: Container(
+          padding: EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(15.0)),
+              gradient: LinearGradient(colors: gradient)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +34,7 @@ class CreditCard extends StatelessWidget {
               Text(brand,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 16.0,
+                      fontSize: 14.0,
                       fontWeight: FontWeight.bold)),
               Text(number, style: TextStyle(color: Colors.white)),
               Text(userName,
@@ -39,6 +44,8 @@ class CreditCard extends StatelessWidget {
                       fontWeight: FontWeight.w100)),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

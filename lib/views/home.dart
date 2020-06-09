@@ -8,25 +8,25 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 final List<Widget> cardList = [
   CreditCard(
-      color: Colors.blue,
       userName: 'Alan Mareines',
       number: '1234 1234 1234 1234',
-      brand: "VISA"),
+      brand: "VISA",
+      gradient: [Color(0xffFDC830), Color(0xffF37335)]),
   CreditCard(
-      color: Colors.orange,
       userName: 'Alan Mareines',
       number: '1234 1234 1234 1234',
-      brand: "MASTER CARD"),
+      brand: "MASTER CARD",
+      gradient: [Color(0xffa8c0ff), Color(0xff3f2b96)]),
   CreditCard(
-      color: Colors.red,
       userName: 'Alan Mareines',
       number: '1234 1234 1234 1234',
-      brand: "VISA"),
+      brand: "VISA",
+      gradient: [Color(0xffbc4e9c), Color(0xfff80759)]),
   CreditCard(
-      color: Colors.purple,
       userName: 'Alan Mareines',
       number: '1234 1234 1234 1234',
-      brand: "AMERICAN EXPRESS"),
+      brand: "AMERICAN EXPRESS",
+      gradient: [Color(0xff96c93d), Color(0xff00b09b)]),
 ];
 
 final List<Widget> imageSliders = cardList
@@ -56,54 +56,50 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: kCustomAppBar('Olá $userName'),
-      body: Stack(
-        children: <Widget>[
-          Jumbotron(accountId: accountId, accountBalance: accountBalance),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.2 - 45,
-            child: Container(
-              padding: EdgeInsets.zero,
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: <Widget>[
-                  Column(
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            backgroundColor: kPrimaryColor,
+            title: kCustomAppBar('Olá, $userName'),
+            pinned: true,
+            expandedHeight: 210.0,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Jumbotron(
+                accountBalance: accountBalance,
+                accountId: accountId,
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: Column(
                     children: <Widget>[
-                      Container(
-                        child: Column(
-                          children: <Widget>[
-                            CarouselSlider(
-                              options: CarouselOptions(
-                                height: 120,
-                                viewportFraction: 0.50,
-                                autoPlay: false,
-                                enlargeCenterPage: true,
-                              ),
-                              items: imageSliders,
-                            ),
-                          ],
+                      CarouselSlider(
+                        options: CarouselOptions(
+                          height: 120,
+                          viewportFraction: 0.50,
+                          autoPlay: false,
+                          enlargeCenterPage: true,
                         ),
+                        items: imageSliders,
                       ),
-                      SizedBox(height: 5.0),
                       AccountChart(),
-                      Container(
-                        height: 200,
-                        margin: EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
+                      Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0)),
                         child: Padding(
-                          padding: const EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.all(18.0),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Flexible(
-                                flex: 2,
+                                flex: 8,
                                 child: Container(
                                   child: Column(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceAround,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
@@ -114,8 +110,9 @@ class HomeScreen extends StatelessWidget {
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                             color: Colors.grey[800],
-                                            fontSize: 22.0),
+                                            fontSize: 20.0),
                                       ),
+                                      SizedBox(height: 20.0),
                                       Row(
                                         children: <Widget>[
                                           Text(
@@ -136,15 +133,15 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Flexible(flex: 1, child: kPixLogo),
+                              Flexible(flex: 3, child: kPixLogo),
                             ],
                           ),
                         ),
-                      ),
+                      )
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],
