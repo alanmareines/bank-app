@@ -1,4 +1,5 @@
 import 'package:banking_app/components/credit_cards.dart';
+import 'package:banking_app/components/custom_app_bar.dart';
 import 'package:banking_app/components/jumbotron.dart';
 import 'package:banking_app/components/chart.dart';
 import 'package:banking_app/constants.dart';
@@ -55,96 +56,95 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: kCustomAppBar('Olá $userName'),
       body: Stack(
         children: <Widget>[
-          Jumbotron(
-              accountId: accountId,
-              accountBalance: accountBalance,
-              title: 'Olá, $userName'),
-          Container(
-            margin: EdgeInsets.only(
-              top: 200.0,
-            ),
-            padding: EdgeInsets.zero,
-            child: ListView(
-              scrollDirection: Axis.vertical,
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Container(
-                      child: Column(
-                        children: <Widget>[
-                          CarouselSlider(
-                            options: CarouselOptions(
-                              height: 120,
-                              viewportFraction: 0.50,
-                              autoPlay: false,
-                              enlargeCenterPage: true,
-                            ),
-                            items: imageSliders,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 5.0),
-                    AccountChart(),
-                    Container(
-                      height: 200,
-                      margin: EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10.0))),
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Jumbotron(accountId: accountId, accountBalance: accountBalance),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.2 - 45,
+            child: Container(
+              padding: EdgeInsets.zero,
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        child: Column(
                           children: <Widget>[
-                            Flexible(
-                              flex: 2,
-                              child: Container(
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      'Pagamentos Instantâneos disponível',
-                                      softWrap: true,
-                                      overflow: TextOverflow.clip,
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          color: Colors.grey[800],
-                                          fontSize: 22.0),
-                                    ),
-                                    Row(
-                                      children: <Widget>[
-                                        Text(
-                                          'Experimente ',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                              color: Colors.grey[800],
-                                              fontSize: 18.0),
-                                        ),
-                                        Icon(
-                                          Icons.arrow_forward_ios,
-                                          size: 20,
-                                          color: Colors.grey[600],
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                            CarouselSlider(
+                              options: CarouselOptions(
+                                height: 120,
+                                viewportFraction: 0.50,
+                                autoPlay: false,
+                                enlargeCenterPage: true,
                               ),
+                              items: imageSliders,
                             ),
-                            Flexible(flex: 1, child: kPixLogo),
                           ],
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      SizedBox(height: 5.0),
+                      AccountChart(),
+                      Container(
+                        height: 200,
+                        margin: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Flexible(
+                                flex: 2,
+                                child: Container(
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        'Pagamentos Instantâneos disponível',
+                                        softWrap: true,
+                                        overflow: TextOverflow.clip,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                            color: Colors.grey[800],
+                                            fontSize: 22.0),
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          Text(
+                                            'Experimente ',
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                color: Colors.grey[800],
+                                                fontSize: 18.0),
+                                          ),
+                                          Icon(
+                                            Icons.arrow_forward_ios,
+                                            size: 20,
+                                            color: Colors.grey[600],
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Flexible(flex: 1, child: kPixLogo),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],

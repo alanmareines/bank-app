@@ -18,10 +18,7 @@ class TransactionScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Jumbotron(
-              accountId: accountId,
-              accountBalance: accountBalance,
-              title: 'Sua Carteira'),
+          Jumbotron(accountId: accountId, accountBalance: accountBalance),
           Container(
             padding: EdgeInsets.only(left: 5.00),
             height: 105.00,

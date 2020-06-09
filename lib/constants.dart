@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+final kBackgroundImage = Image.asset('assets/images/background_sign_in.png');
 final kBankLogo = Image.asset('assets/images/bank_logo.png');
 final kPixLogo = Image.asset('assets/images/pix_logo.png');
 final Color kAccentColor = Color(0xFF97b2ed);

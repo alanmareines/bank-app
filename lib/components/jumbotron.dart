@@ -7,22 +7,24 @@ class Jumbotron extends StatelessWidget {
     Key key,
     @required this.accountId,
     @required this.accountBalance,
-    @required this.title,
   }) : super(key: key);
 
   final String accountId;
-  final String title;
   final String accountBalance;
+  final double appBarHeight = 56.0;
 
   @override
   Widget build(BuildContext context) {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+
     return Container(
       child: Stack(
+        alignment: Alignment.bottomLeft,
         children: <Widget>[
           CustomPaint(
+            size: Size.fromHeight(200.00),
             painter: ShapePainter(),
             child: Container(
-              constraints: BoxConstraints(maxHeight: 200),
               decoration: BoxDecoration(
                 color: Colors.transparent,
               ),
@@ -30,20 +32,14 @@ class Jumbotron extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
-              AppBar(
-                title: Text(
-                  title,
-                  style: TextStyle(fontSize: 16.0),
-                ),
-                backgroundColor: Colors.transparent,
-                elevation: 0.0,
-              ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 alignment: Alignment.centerLeft,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    SizedBox(height: statusBarHeight + 66),
                     Text('Conta'),
                     Text(accountId, style: TextStyle(color: kAccentColor)),
                     SizedBox(height: 14.0),
