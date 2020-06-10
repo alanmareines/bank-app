@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:banking_app/constants.dart';
 
-class PrimaryButton extends StatelessWidget {
-  PrimaryButton({@required this.onTap, @required this.buttonTitle});
+class SecondaryButton extends StatelessWidget {
+  SecondaryButton({@required this.onTap, @required this.buttonTitle});
 
   final Function onTap;
   final String buttonTitle;
@@ -13,20 +13,21 @@ class PrimaryButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: kPrimaryColor,
+          border: Border.all(
+              color: kPrimaryColor, width: 1.0, style: BorderStyle.solid),
+          color: Colors.transparent,
           borderRadius: BorderRadius.all(Radius.circular(25)),
         ),
         child: Center(
           child: Text(
             buttonTitle,
             style: TextStyle(
-              color: Colors.white,
+              color: kPrimaryColor,
               letterSpacing: 3.0,
             ),
           ),
         ),
-        margin: EdgeInsets.only(top: 20.0),
-        padding: EdgeInsets.all(12.0),
+        padding: EdgeInsets.all(10.0),
         width: double.infinity,
       ),
     );

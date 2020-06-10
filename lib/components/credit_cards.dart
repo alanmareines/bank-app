@@ -21,11 +21,11 @@ class CreditCard extends StatelessWidget {
         semanticContainer: true,
         elevation: 7,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
         child: Container(
           padding: EdgeInsets.all(10.0),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(15.0)),
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
               gradient: LinearGradient(colors: gradient)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,

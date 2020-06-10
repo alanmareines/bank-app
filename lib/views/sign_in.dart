@@ -12,7 +12,7 @@ class SignInScreen extends StatelessWidget {
           Stack(
             alignment: Alignment.bottomCenter,
             children: <Widget>[
-              Image.asset('assets/images/background_sign_in_2.png',
+              Image.asset('assets/images/background_sign_in.png',
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.cover),

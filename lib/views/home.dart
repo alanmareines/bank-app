@@ -1,49 +1,13 @@
 import 'package:banking_app/components/credit_cards.dart';
 import 'package:banking_app/components/custom_app_bar.dart';
+import 'package:banking_app/components/custom_bottom_navbar.dart';
 import 'package:banking_app/components/jumbotron.dart';
 import 'package:banking_app/components/chart.dart';
 import 'package:banking_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-final List<Widget> cardList = [
-  CreditCard(
-      userName: 'Alan Mareines',
-      number: '1234 1234 1234 1234',
-      brand: "VISA",
-      gradient: [Color(0xffFDC830), Color(0xffF37335)]),
-  CreditCard(
-      userName: 'Alan Mareines',
-      number: '1234 1234 1234 1234',
-      brand: "MASTER CARD",
-      gradient: [Color(0xffa8c0ff), Color(0xff3f2b96)]),
-  CreditCard(
-      userName: 'Alan Mareines',
-      number: '1234 1234 1234 1234',
-      brand: "VISA",
-      gradient: [Color(0xffbc4e9c), Color(0xfff80759)]),
-  CreditCard(
-      userName: 'Alan Mareines',
-      number: '1234 1234 1234 1234',
-      brand: "AMERICAN EXPRESS",
-      gradient: [Color(0xff96c93d), Color(0xff00b09b)]),
-];
-
-final List<Widget> imageSliders = cardList
-    .map(
-      (item) => Container(
-        child: Container(
-          child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(0.0)),
-              child: Stack(
-                children: <Widget>[item],
-              )),
-        ),
-      ),
-    )
-    .toList();
-
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen(
       {@required this.userName,
       @required this.accountId,
@@ -54,19 +18,47 @@ class HomeScreen extends StatelessWidget {
   final String accountId;
 
   @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
+    List<Widget> cardList = [
+      CreditCard(
+          userName: widget.userName,
+          number: '1234 1234 1234 1234',
+          brand: "VISA",
+          gradient: [Color(0xffFDC830), Color(0xffF37335)]),
+      CreditCard(
+          userName: widget.userName,
+          number: '1234 1234 1234 1234',
+          brand: "MASTER CARD",
+          gradient: [Color(0xffa8c0ff), Color(0xff3f2b96)]),
+      CreditCard(
+          userName: widget.userName,
+          number: '1234 1234 1234 1234',
+          brand: "VISA",
+          gradient: [Color(0xffbc4e9c), Color(0xfff80759)]),
+      CreditCard(
+          userName: widget.userName,
+          number: '1234 1234 1234 1234',
+          brand: "AMERICAN EXPRESS",
+          gradient: [Color(0xff96c93d), Color(0xff00b09b)]),
+    ];
     return Scaffold(
+      bottomNavigationBar: CustomBottomNavBar(),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
             backgroundColor: kPrimaryColor,
-            title: kCustomAppBar('Olá, $userName'),
+            title: kCustomAppBar('Olá, ${widget.userName}'),
             pinned: true,
             expandedHeight: 210.0,
             flexibleSpace: FlexibleSpaceBar(
               background: Jumbotron(
-                accountBalance: accountBalance,
-                accountId: accountId,
+                accountBalance: widget.accountBalance,
+                accountId: widget.accountId,
               ),
             ),
           ),
@@ -84,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                           autoPlay: false,
                           enlargeCenterPage: true,
                         ),
-                        items: imageSliders,
+                        items: cardList,
                       ),
                       AccountChart(),
                       Card(
