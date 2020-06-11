@@ -23,7 +23,7 @@ class _ScreenIndexState extends State<ScreenIndex> {
     List _screens = [
       HomeScreen(customer: widget.customer),
       TransactionScreen(customer: widget.customer),
-      PixPayScreen(),
+      PixPayScreen(customer: widget.customer),
       InfoScreen(),
     ];
 
