@@ -48,4 +48,42 @@ class NetworkHelper {
       print(response.statusCode);
     }
   }
+
+  Future signUpCustomer(
+      String name,
+      String privateId,
+      String email,
+      String accountId,
+      String address,
+      String cep,
+      String phone,
+      String password,
+      String passwordConfirmation) async {
+    http.Response response = await http.post(
+      'https://api.linapay.io/v1/psp/customers',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({
+        "customer": {
+          "psp_id": "1",
+          "private_id": privateId,
+          "account_id": accountId,
+          "name": name,
+          "email": email,
+          "address": address,
+          "postal_code": cep,
+          "phone": phone,
+          "password": password,
+          "password_confirmation": passwordConfirmation
+        },
+      }),
+    );
+    if (response.statusCode == 200) {
+      String data = response.body;
+      return jsonDecode(data);
+    } else {
+      return "Error";
+    }
+  }
 }

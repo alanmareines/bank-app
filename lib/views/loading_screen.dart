@@ -27,7 +27,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     var customerData =
         await CustomerModel().getCustomerInfo(customerToken, widget.accountId);
 
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
       return HomeScreen(
         accountBalance: customerData.balance,
         accountId: customerData.accountId,

@@ -1,7 +1,6 @@
 import 'package:banking_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:banking_app/views/sign_in.dart';
-import 'package:banking_app/views/screen_index.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,11 +24,7 @@ class MyApp extends StatelessWidget {
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => SignInScreen(),
-        '/transactions': (context) => ScreenIndex(),
-      },
+      home: SignInScreen(),
     );
   }
 }

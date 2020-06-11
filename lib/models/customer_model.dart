@@ -32,4 +32,19 @@ class CustomerModel {
     customer.balance = customerBalance.toString();
     return customer;
   }
+
+  Future signUpCustomer(
+      String name,
+      String privateId,
+      String email,
+      String accountId,
+      String address,
+      String cep,
+      String phone,
+      String password,
+      String passwordConfirmation) async {
+    NetworkHelper networkHelper = NetworkHelper();
+    await networkHelper.signUpCustomer(name, privateId, email, accountId,
+        address, cep, phone, password, passwordConfirmation);
+  }
 }
