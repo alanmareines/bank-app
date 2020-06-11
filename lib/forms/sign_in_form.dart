@@ -135,6 +135,11 @@ class SignInFormState extends State<SignInForm> {
       key: _signUpKey,
       child: Column(
         children: <Widget>[
+          Container(
+            alignment: Alignment.center,
+            child: Text("Preencha os Campos",
+                style: TextStyle(color: kPrimaryColor, fontSize: 20.0)),
+          ),
           TextFormField(
             controller: signUpName,
             style: TextStyle(color: kPrimaryColor),
@@ -300,6 +305,15 @@ class SignInFormState extends State<SignInForm> {
               },
               buttonTitle: 'Criar Conta',
             ),
+          ),
+          IconButton(
+            alignment: Alignment.topLeft,
+            icon: Icon(Icons.arrow_back, color: kPrimaryColor, size: 30),
+            onPressed: () {
+              setState(() {
+                _signIn = true;
+              });
+            },
           ),
         ],
       ),

@@ -39,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Future signUpUser() async {
-    var result = await CustomerModel().signUpCustomer(
+    await CustomerModel().signUpCustomer(
         widget.name,
         widget.privateId,
         widget.email,
@@ -49,7 +49,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         widget.phone,
         widget.password,
         widget.passwordConfirmation);
-    print(result);
 
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
       return LoadingScreen(

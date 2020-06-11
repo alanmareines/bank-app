@@ -1,6 +1,6 @@
 import 'package:banking_app/constants.dart';
 import 'package:banking_app/models/customer_model.dart';
-import 'package:banking_app/views/home.dart';
+import 'package:banking_app/views/screen_index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -24,14 +24,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Future getUserInfo() async {
     var customerToken = await CustomerModel()
         .getCustomerToken(widget.accountId, widget.password);
-    var customerData =
+    var customer =
         await CustomerModel().getCustomerInfo(customerToken, widget.accountId);
 
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-      return HomeScreen(
-        accountBalance: customerData.balance,
-        accountId: customerData.accountId,
-        userName: customerData.name,
+      return ScreenIndex(
+        customer: customer,
       );
     }));
   }

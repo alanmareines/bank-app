@@ -1,21 +1,16 @@
 import 'package:banking_app/components/credit_cards.dart';
 import 'package:banking_app/components/custom_app_bar.dart';
-import 'package:banking_app/components/custom_bottom_navbar.dart';
 import 'package:banking_app/components/jumbotron.dart';
 import 'package:banking_app/components/chart.dart';
 import 'package:banking_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:banking_app/models/customer_model.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen(
-      {@required this.userName,
-      @required this.accountId,
-      @required this.accountBalance});
+  HomeScreen({@required this.customer});
 
-  final String userName;
-  final String accountBalance;
-  final String accountId;
+  final CustomerModel customer;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -26,39 +21,38 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     List<Widget> cardList = [
       CreditCard(
-          userName: widget.userName,
+          userName: widget.customer.name,
           number: '1234 1234 1234 1234',
           brand: "VISA",
           gradient: [Color(0xffFDC830), Color(0xffF37335)]),
       CreditCard(
-          userName: widget.userName,
+          userName: widget.customer.name,
           number: '1234 1234 1234 1234',
           brand: "MASTER CARD",
           gradient: [Color(0xffa8c0ff), Color(0xff3f2b96)]),
       CreditCard(
-          userName: widget.userName,
+          userName: widget.customer.name,
           number: '1234 1234 1234 1234',
           brand: "VISA",
           gradient: [Color(0xffbc4e9c), Color(0xfff80759)]),
       CreditCard(
-          userName: widget.userName,
+          userName: widget.customer.name,
           number: '1234 1234 1234 1234',
           brand: "AMERICAN EXPRESS",
           gradient: [Color(0xff96c93d), Color(0xff00b09b)]),
     ];
     return Scaffold(
-      bottomNavigationBar: CustomBottomNavBar(),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
             backgroundColor: kPrimaryColor,
-            title: kCustomAppBar('Olá, ${widget.userName}'),
+            title: kCustomAppBar('Olá, ${widget.customer.name}'),
             pinned: true,
             expandedHeight: 210.0,
             flexibleSpace: FlexibleSpaceBar(
               background: Jumbotron(
-                accountBalance: widget.accountBalance,
-                accountId: widget.accountId,
+                accountBalance: widget.customer.balance,
+                accountId: widget.customer.accountId,
               ),
             ),
           ),

@@ -2,13 +2,19 @@ import 'package:banking_app/helpers/network_helper.dart';
 
 class CustomerModel {
   CustomerModel(
-      {this.accountId, this.name, this.address, this.email, this.phone});
+      {this.accountId,
+      this.name,
+      this.address,
+      this.email,
+      this.phone,
+      this.token});
   String accountId;
   String name;
   String address;
   String email;
   String phone;
   String balance;
+  String token;
 
   CustomerModel.fromJson(Map<String, dynamic> json)
       : accountId = json['account_id'],
@@ -30,6 +36,7 @@ class CustomerModel {
     var customerBalance =
         await networkHelper.getCustomerBalance(token, accountId);
     customer.balance = customerBalance.toString();
+    customer.token = token;
     return customer;
   }
 

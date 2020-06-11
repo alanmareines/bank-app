@@ -86,4 +86,18 @@ class NetworkHelper {
       return "Error";
     }
   }
+
+  Future getCustomerTransactions(String token) async {
+    http.Response response = await http.get(
+        "https://api.linapay.io/v1/psp/customers/transactions",
+        headers: <String, String>{
+          'authorization': 'Bearer $token',
+        });
+    if (response.statusCode == 200) {
+      String data = response.body;
+      return jsonDecode(data)["data"];
+    } else {
+      print(response.statusCode);
+    }
+  }
 }

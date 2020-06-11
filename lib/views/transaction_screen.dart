@@ -3,18 +3,14 @@ import 'package:banking_app/components/jumbotron.dart';
 import 'package:banking_app/components/transaction.dart';
 import 'package:banking_app/components/service.dart';
 import 'package:banking_app/constants.dart';
+import 'package:banking_app/models/customer_model.dart';
+import 'package:banking_app/models/transaction_model.dart';
 
 import 'package:flutter/material.dart';
 
 class TransactionScreen extends StatelessWidget {
-  TransactionScreen(
-      {@required this.userName,
-      @required this.accountBalance,
-      @required this.accountId});
-
-  final String accountBalance;
-  final String accountId;
-  final String userName;
+  TransactionScreen({@required this.customer});
+  final CustomerModel customer;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +24,8 @@ class TransactionScreen extends StatelessWidget {
             expandedHeight: 210.0,
             flexibleSpace: FlexibleSpaceBar(
               background: Jumbotron(
-                accountBalance: accountBalance,
-                accountId: accountId,
+                accountBalance: customer.balance,
+                accountId: customer.accountId,
               ),
             ),
           ),
@@ -106,15 +102,15 @@ class TransactionScreen extends StatelessWidget {
                               amount: "29,00 R\$",
                               date: "20/01/2020"),
                           Transaction(
-                              counterParty: "Wellington Barbosa",
+                              counterParty: "Liliane Dutra",
                               amount: "100,00 R\$",
                               date: "14/03/2020"),
                           Transaction(
-                              counterParty: "Márcio Castro",
+                              counterParty: "Marcos Guirro",
                               amount: "-120,00 R\$",
                               date: "17/02/2020"),
                           Transaction(
-                              counterParty: "Murilo Rabusky",
+                              counterParty: "Edsandro Rodrigues",
                               amount: "2.309,00 R\$",
                               date: "29/01/2020"),
                           Transaction(
@@ -135,6 +131,43 @@ class TransactionScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  //getting transactions from LINA API
+
+  Future getTransactions() async {
+    var transactionList =
+        await TransactionsList().getCustomerTransactions(customer.token);
+    print(transactionList);
+    return transactionList;
+  }
+
+  //Building a LIST VIEW for transactions fetched in API
+
+  Widget transactionsWidget() {
+    return FutureBuilder(
+      builder: (context, transactionSnap) {
+        //IF Request went bad, return Container.
+        if (transactionSnap.connectionState == ConnectionState.none &&
+            transactionSnap.hasData == null) {
+          return Container(child: Text("transactionSnap is $transactionSnap"));
+        }
+        //If 200, then build LIST
+        return ListView.builder(
+          itemCount: transactionSnap.data.length,
+          itemBuilder: (context, index) {
+            Transaction transaction = transactionSnap.data[index];
+            print(transaction);
+            return Column(
+              children: <Widget>[
+                // Widget to display the list of project
+              ],
+            );
+          },
+        );
+      },
+      future: getTransactions(),
     );
   }
 }
