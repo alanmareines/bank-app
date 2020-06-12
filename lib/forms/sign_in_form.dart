@@ -33,6 +33,15 @@ class SignInFormState extends State<SignInForm> {
   void dispose() {
     accountIdController.dispose();
     passwordController.dispose();
+    signUpPasswordConfirmation.dispose();
+    signUpPassword.dispose();
+    signUpPhone.dispose();
+    signUpCEP.dispose();
+    signUpAddress.dispose();
+    signUpEmail.dispose();
+    signUpName.dispose();
+    signUpAccountId.dispose();
+    signUpPrivateId.dispose();
     super.dispose();
   }
 
