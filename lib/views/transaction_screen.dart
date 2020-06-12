@@ -138,7 +138,7 @@ class TransactionScreen extends StatelessWidget {
 
   Future getTransactions() async {
     var transactionList =
-        await TransactionsList().getCustomerTransactions(customer.token);
+        await TransactionModel().getCustomerTransactions(customer.token);
     print(transactionList);
     return transactionList;
   }

@@ -95,7 +95,7 @@ class _PixPayScreenState extends State<PixPayScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
-                            image: AssetImage('assets/images/qr_receive.gif'),
+                            image: AssetImage('assets/images/qr_pay.gif'),
                           ),
                         ),
                       ),
@@ -159,7 +159,7 @@ class _PixPayScreenState extends State<PixPayScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
-                            image: AssetImage('assets/images/qr_pay.gif'),
+                            image: AssetImage('assets/images/qr_receive.gif'),
                           ),
                         ),
                       ),
@@ -174,33 +174,3 @@ class _PixPayScreenState extends State<PixPayScreen> {
     );
   }
 }
-
-// Column(
-//       children: <Widget>[
-//         Padding(
-//           padding: const EdgeInsets.all(20.0),
-//           child: QrImage(
-//             data: "1234567890",
-//             version: QrVersions.auto,
-//             size: MediaQuery.of(context).size.width,
-//           ),
-//         ),
-//         Container(
-//           child: Center(
-//             child: Container(
-//               decoration: BoxDecoration(
-//                   color: Colors.white,
-//                   borderRadius: BorderRadius.all(Radius.circular(50))),
-//               child: IconButton(
-//                   padding: EdgeInsets.all(20.00),
-//                   iconSize: 60,
-//                   color: kPrimaryColor,
-//                   icon: Icon(Icons.camera_alt),
-//                   onPressed: () {
-//                     main();
-//                   }),
-//             ),
-//           ),
-//         ),
-//       ],
-//     );

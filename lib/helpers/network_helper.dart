@@ -1,3 +1,5 @@
+import 'package:banking_app/models/customer_model.dart';
+import 'package:banking_app/models/transaction_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -98,6 +100,35 @@ class NetworkHelper {
       return jsonDecode(data)["data"];
     } else {
       print(response.statusCode);
+    }
+  }
+
+  Future postIntraTransaction(
+      CustomerModel customer, TransactionModel transaction) async {
+    http.Response response = await http.post(
+      'https://api.linapay.io/v1/psp/customers',
+      headers: <String, String>{
+        'authorization': 'Bearer ${customer.token}',
+      },
+      body: jsonEncode({
+        "intra": {
+          "message_id": transaction.txId,
+          "end_to_end_id": "",
+          "settlement_time_request": transaction.dateTime,
+          "debtor_id": "meu_banco",
+          "creditor_id": "meu_banco",
+          "debtor_account_id": transaction.debtorAccountId,
+          "creditor_account_id": transaction.creditorAccountId,
+          "purpose": transaction.additionalInfo,
+          "amount": transaction.amount,
+        },
+      }),
+    );
+    if (response.statusCode == 200) {
+      String data = response.body;
+      return jsonDecode(data);
+    } else {
+      return "Error";
     }
   }
 }
