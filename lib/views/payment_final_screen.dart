@@ -37,6 +37,7 @@ class _PaymentFinalScreenState extends State<PaymentFinalScreen> {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Container(
+          padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Colors.white,
             boxShadow: [
@@ -76,12 +77,14 @@ class _PaymentFinalScreenState extends State<PaymentFinalScreen> {
                 ),
                 SizedBox(height: 20),
                 PrimaryButton(
-                    onTap: () {
+                    onTap: () async {
                       if (_amountKey.currentState.validate()) {
-                        //TODO
+                        widget.transaction.amount =
+                            double.parse(amountController.text);
+                        await widget.transaction.makePayment(widget.customer);
                       }
                     },
-                    buttonTitle: 'Gerar QR Code')
+                    buttonTitle: 'Confirmar')
               ],
             ),
           ),
@@ -156,8 +159,7 @@ class _PaymentFinalScreenState extends State<PaymentFinalScreen> {
               ),
               PrimaryButton(
                   onTap: () {
-                    widget.transaction
-                        .makePayment(widget.customer, widget.transaction);
+                    widget.transaction.makePayment(widget.customer);
                   },
                   buttonTitle: "OK")
             ],

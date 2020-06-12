@@ -106,7 +106,7 @@ class NetworkHelper {
   Future postIntraTransaction(
       CustomerModel customer, TransactionModel transaction) async {
     http.Response response = await http.post(
-      'https://api.linapay.io/v1/psp/customers',
+      'https://api.linapay.io/v1/psp/customers/intra-transfers',
       headers: <String, String>{
         'authorization': 'Bearer ${customer.token}',
       },
@@ -114,7 +114,7 @@ class NetworkHelper {
         "intra": {
           "message_id": transaction.txId,
           "end_to_end_id": "",
-          "settlement_time_request": transaction.dateTime,
+          "settlement_time_request": transaction.dateTime.toString(),
           "debtor_id": "meu_banco",
           "creditor_id": "meu_banco",
           "debtor_account_id": transaction.debtorAccountId,
@@ -122,6 +122,29 @@ class NetworkHelper {
           "purpose": transaction.additionalInfo,
           "amount": transaction.amount,
         },
+      }),
+    );
+    if (response.statusCode == 200) {
+      String data = response.body;
+      return jsonDecode(data);
+    } else {
+      return "Error";
+    }
+  }
+
+  Future getQrString(CustomerModel customer, String amount) async {
+    http.Response response = await http.post(
+      'https://api.linapay.io/v1/psp/customers/intra-transfers',
+      //TODO qr endpoint
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({
+        "merchant_city": "Sao Paulo",
+        "merchant_name": customer.name,
+        "account_id": customer.accountId,
+        "amount": amount,
+        "additional_info": 'linaqr',
       }),
     );
     if (response.statusCode == 200) {

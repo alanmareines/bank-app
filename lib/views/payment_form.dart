@@ -1,6 +1,7 @@
 import 'package:banking_app/components/custom_app_bar.dart';
 import 'package:banking_app/components/primary_button.dart';
 import 'package:banking_app/models/customer_model.dart';
+import 'package:banking_app/models/transaction_model.dart';
 import 'package:banking_app/views/payment_loader.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class PaymentForm extends StatefulWidget {
 class _PaymentFormState extends State<PaymentForm> {
   final _paymentKey = GlobalKey<FormState>();
   final payeeAmountController = TextEditingController();
+  TransactionModel transaction = TransactionModel();
 
   void dispose() {
     payeeAmountController.dispose();
@@ -97,7 +99,7 @@ class _PaymentFormState extends State<PaymentForm> {
       context,
       MaterialPageRoute(
         builder: (context) {
-          return PaymentLoader(customer: customer, qrData: result);
+          return PaymentLoader(customer: customer, qrData: result, payer: true);
         },
       ),
     );
@@ -155,7 +157,17 @@ class _PaymentFormState extends State<PaymentForm> {
           PrimaryButton(
               onTap: () {
                 if (_paymentKey.currentState.validate()) {
-                  //TODO
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return PaymentLoader(
+                            customer: widget.customer,
+                            qrData: payeeAmountController.text,
+                            payer: false);
+                      },
+                    ),
+                  );
                 }
               },
               buttonTitle: 'Gerar QR Code')
