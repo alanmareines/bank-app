@@ -77,11 +77,11 @@ class _PaymentFinalScreenState extends State<PaymentFinalScreen> {
                 ),
                 SizedBox(height: 20),
                 PrimaryButton(
-                    onTap: () async {
+                    onTap: () {
                       if (_amountKey.currentState.validate()) {
                         widget.transaction.amount =
                             double.parse(amountController.text);
-                        await widget.transaction.makePayment(widget.customer);
+                        widget.transaction.makePayment(widget.customer);
                       }
                     },
                     buttonTitle: 'Confirmar')

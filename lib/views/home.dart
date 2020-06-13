@@ -3,6 +3,7 @@ import 'package:banking_app/components/custom_app_bar.dart';
 import 'package:banking_app/components/jumbotron.dart';
 import 'package:banking_app/components/chart.dart';
 import 'package:banking_app/constants.dart';
+import 'package:banking_app/views/pix_pay.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:banking_app/models/customer_model.dart';
@@ -73,54 +74,63 @@ class _HomeScreenState extends State<HomeScreen> {
                         items: cardList,
                       ),
                       AccountChart(),
-                      Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: Row(
-                            children: <Widget>[
-                              Flexible(
-                                flex: 8,
-                                child: Container(
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        'Pagamentos Instantâneos disponível',
-                                        softWrap: true,
-                                        overflow: TextOverflow.clip,
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            color: Colors.grey[800],
-                                            fontSize: 20.0),
-                                      ),
-                                      SizedBox(height: 20.0),
-                                      Row(
-                                        children: <Widget>[
-                                          Text(
-                                            'Experimente ',
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                                color: Colors.grey[800],
-                                                fontSize: 18.0),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_forward_ios,
-                                            size: 20,
-                                            color: Colors.grey[600],
-                                          )
-                                        ],
-                                      ),
-                                    ],
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              (context),
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PixPayScreen(customer: widget.customer)));
+                        },
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Row(
+                              children: <Widget>[
+                                Flexible(
+                                  flex: 8,
+                                  child: Container(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          'Pagamentos Instantâneos disponível',
+                                          softWrap: true,
+                                          overflow: TextOverflow.clip,
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                              color: Colors.grey[800],
+                                              fontSize: 20.0),
+                                        ),
+                                        SizedBox(height: 20.0),
+                                        Row(
+                                          children: <Widget>[
+                                            Text(
+                                              'Experimente ',
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  color: Colors.grey[800],
+                                                  fontSize: 18.0),
+                                            ),
+                                            Icon(
+                                              Icons.arrow_forward_ios,
+                                              size: 20,
+                                              color: Colors.grey[600],
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Flexible(flex: 3, child: kPixLogo),
-                            ],
+                                Flexible(flex: 3, child: kPixLogo),
+                              ],
+                            ),
                           ),
                         ),
                       )

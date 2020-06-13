@@ -142,189 +142,192 @@ class SignInFormState extends State<SignInForm> {
   Form buildFormSignUp(BuildContext context) {
     return Form(
       key: _signUpKey,
-      child: Column(
-        children: <Widget>[
-          Container(
-            alignment: Alignment.center,
-            child: Text("Preencha os Campos",
-                style: TextStyle(color: kPrimaryColor, fontSize: 20.0)),
-          ),
-          TextFormField(
-            controller: signUpName,
-            style: TextStyle(color: kPrimaryColor),
-            decoration: const InputDecoration(
-              icon: Icon(Icons.account_circle,
-                  size: 35.0, color: Color(0xFF0f2263)),
-              hintText: 'Nome',
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              child: Text("Preencha os Campos",
+                  style: TextStyle(color: kPrimaryColor, fontSize: 20.0)),
             ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Campo deve ser Preenchido';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: signUpPrivateId,
-            style: TextStyle(color: kPrimaryColor),
-            decoration: const InputDecoration(
-              icon: Icon(Icons.pageview, size: 35.0, color: Color(0xFF0f2263)),
-              hintText: 'CPF',
-            ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Campo deve ser Preenchido';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: signUpEmail,
-            style: TextStyle(color: kPrimaryColor),
-            decoration: const InputDecoration(
-              icon: Icon(Icons.alternate_email,
-                  size: 35.0, color: Color(0xFF0f2263)),
-              hintText: 'E-mail',
-            ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Campo deve ser Preenchido';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: signUpAccountId,
-            style: TextStyle(color: kPrimaryColor),
-            decoration: const InputDecoration(
-              icon: Icon(Icons.account_balance_wallet,
-                  size: 35.0, color: Color(0xFF0f2263)),
-              hintText: 'Conta',
-            ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Campo deve ser Preenchido';
-              }
-              return null;
-            },
-          ),
-          SizedBox(
-            height: 10.00,
-          ),
-          TextFormField(
-            controller: signUpAddress,
-            style: TextStyle(color: kPrimaryColor),
-            decoration: const InputDecoration(
-              icon:
-                  Icon(Icons.location_on, size: 35.0, color: Color(0xFF0f2263)),
-              hintText: 'Endereço',
-            ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Campo deve ser Preenchido';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: signUpCEP,
-            style: TextStyle(color: kPrimaryColor),
-            decoration: const InputDecoration(
-              icon: Icon(Icons.add_location,
-                  size: 35.0, color: Color(0xFF0f2263)),
-              hintText: 'CEP',
-            ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Campo deve ser Preenchido';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: signUpPhone,
-            style: TextStyle(color: kPrimaryColor),
-            decoration: const InputDecoration(
-              icon:
-                  Icon(Icons.local_phone, size: 35.0, color: Color(0xFF0f2263)),
-              hintText: 'Telefone',
-            ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Campo deve ser Preenchido';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: signUpPassword,
-            style: TextStyle(color: kPrimaryColor),
-            obscureText: true,
-            decoration: const InputDecoration(
-              icon: Icon(Icons.enhanced_encryption,
-                  size: 35.0, color: Color(0xFF0f2263)),
-              hintText: 'Sua Senha',
-            ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Campo deve ser Preenchido';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: signUpPasswordConfirmation,
-            style: TextStyle(color: kPrimaryColor),
-            obscureText: true,
-            decoration: const InputDecoration(
-              icon: Icon(Icons.enhanced_encryption,
-                  size: 35.0, color: Color(0xFF0f2263)),
-              hintText: 'Sua senha novamente',
-            ),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Campo deve ser Preenchido';
-              }
-              return null;
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
-            child: PrimaryButton(
-              onTap: () {
-                // CustomerInfo linaInfo = CustomerInfo(accountId: accountId, password: password)
-                if (_signUpKey.currentState.validate()) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SignUpScreen(
-                        accountId: signUpAccountId.text,
-                        name: signUpName.text,
-                        privateId: signUpPrivateId.text,
-                        email: signUpEmail.text,
-                        address: signUpAddress.text,
-                        cep: signUpCEP.text,
-                        phone: signUpPhone.text,
-                        password: signUpPassword.text,
-                        passwordConfirmation: signUpPasswordConfirmation.text,
-                      ),
-                    ),
-                  );
+            TextFormField(
+              controller: signUpName,
+              style: TextStyle(color: kPrimaryColor),
+              decoration: const InputDecoration(
+                icon: Icon(Icons.account_circle,
+                    size: 35.0, color: Color(0xFF0f2263)),
+                hintText: 'Nome',
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Campo deve ser Preenchido';
                 }
+                return null;
               },
-              buttonTitle: 'Criar Conta',
             ),
-          ),
-          IconButton(
-            alignment: Alignment.topLeft,
-            icon: Icon(Icons.arrow_back, color: kPrimaryColor, size: 30),
-            onPressed: () {
-              setState(() {
-                _signIn = true;
-              });
-            },
-          ),
-        ],
+            TextFormField(
+              controller: signUpPrivateId,
+              style: TextStyle(color: kPrimaryColor),
+              decoration: const InputDecoration(
+                icon:
+                    Icon(Icons.pageview, size: 35.0, color: Color(0xFF0f2263)),
+                hintText: 'CPF',
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Campo deve ser Preenchido';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: signUpEmail,
+              style: TextStyle(color: kPrimaryColor),
+              decoration: const InputDecoration(
+                icon: Icon(Icons.alternate_email,
+                    size: 35.0, color: Color(0xFF0f2263)),
+                hintText: 'E-mail',
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Campo deve ser Preenchido';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: signUpAccountId,
+              style: TextStyle(color: kPrimaryColor),
+              decoration: const InputDecoration(
+                icon: Icon(Icons.account_balance_wallet,
+                    size: 35.0, color: Color(0xFF0f2263)),
+                hintText: 'Conta',
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Campo deve ser Preenchido';
+                }
+                return null;
+              },
+            ),
+            SizedBox(
+              height: 10.00,
+            ),
+            TextFormField(
+              controller: signUpAddress,
+              style: TextStyle(color: kPrimaryColor),
+              decoration: const InputDecoration(
+                icon: Icon(Icons.location_on,
+                    size: 35.0, color: Color(0xFF0f2263)),
+                hintText: 'Endereço',
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Campo deve ser Preenchido';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: signUpCEP,
+              style: TextStyle(color: kPrimaryColor),
+              decoration: const InputDecoration(
+                icon: Icon(Icons.add_location,
+                    size: 35.0, color: Color(0xFF0f2263)),
+                hintText: 'CEP',
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Campo deve ser Preenchido';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: signUpPhone,
+              style: TextStyle(color: kPrimaryColor),
+              decoration: const InputDecoration(
+                icon: Icon(Icons.local_phone,
+                    size: 35.0, color: Color(0xFF0f2263)),
+                hintText: 'Telefone',
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Campo deve ser Preenchido';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: signUpPassword,
+              style: TextStyle(color: kPrimaryColor),
+              obscureText: true,
+              decoration: const InputDecoration(
+                icon: Icon(Icons.enhanced_encryption,
+                    size: 35.0, color: Color(0xFF0f2263)),
+                hintText: 'Sua Senha',
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Campo deve ser Preenchido';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: signUpPasswordConfirmation,
+              style: TextStyle(color: kPrimaryColor),
+              obscureText: true,
+              decoration: const InputDecoration(
+                icon: Icon(Icons.enhanced_encryption,
+                    size: 35.0, color: Color(0xFF0f2263)),
+                hintText: 'Sua senha novamente',
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Campo deve ser Preenchido';
+                }
+                return null;
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+              child: PrimaryButton(
+                onTap: () {
+                  // CustomerInfo linaInfo = CustomerInfo(accountId: accountId, password: password)
+                  if (_signUpKey.currentState.validate()) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignUpScreen(
+                          accountId: signUpAccountId.text,
+                          name: signUpName.text,
+                          privateId: signUpPrivateId.text,
+                          email: signUpEmail.text,
+                          address: signUpAddress.text,
+                          cep: signUpCEP.text,
+                          phone: signUpPhone.text,
+                          password: signUpPassword.text,
+                          passwordConfirmation: signUpPasswordConfirmation.text,
+                        ),
+                      ),
+                    );
+                  }
+                },
+                buttonTitle: 'Criar Conta',
+              ),
+            ),
+            IconButton(
+              alignment: Alignment.topLeft,
+              icon: Icon(Icons.arrow_back, color: kPrimaryColor, size: 30),
+              onPressed: () {
+                setState(() {
+                  _signIn = true;
+                });
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

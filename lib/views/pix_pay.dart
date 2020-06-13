@@ -47,7 +47,7 @@ class _PixPayScreenState extends State<PixPayScreen> {
                 child: Container(
                   constraints: BoxConstraints.expand(
                       width: 320,
-                      height: MediaQuery.of(context).size.height / 2.8),
+                      height: MediaQuery.of(context).size.height / 2.3),
                   padding:
                       EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   decoration: BoxDecoration(
@@ -114,7 +114,7 @@ class _PixPayScreenState extends State<PixPayScreen> {
                       EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                   constraints: BoxConstraints.expand(
                       width: 320,
-                      height: MediaQuery.of(context).size.height / 2.8),
+                      height: MediaQuery.of(context).size.height / 2.3),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16.0),

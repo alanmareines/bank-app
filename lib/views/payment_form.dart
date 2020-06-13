@@ -94,7 +94,7 @@ class _PaymentFormState extends State<PaymentForm> {
 
     // var result = await BarcodeScanner.scan(options: options);
     var result =
-        "00020126580014br.gov.bcb.pix0136123e4567-e12b-12d1-a456-4266554400005204000053039865802BR5913Fulano de Tal6008BRASILIA62070503***63041D3D";
+        "00020126450014br.gov.bcb.pix0119hendricks@hooli.com02005204000053039865405100.05802BR5921Wellington M. Barbosa6009São Paulo62400536d6979fca-3a0b-419c-9ec2-6ab89059bdde630424E9";
     Navigator.push(
       context,
       MaterialPageRoute(

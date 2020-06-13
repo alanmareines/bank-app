@@ -20,7 +20,7 @@ class TransactionModel {
   String merchantName;
   String debtorAccountId;
   String creditorAccountId;
-  double amount;
+  var amount;
   String additionalInfo;
 
   Future<dynamic> getCustomerToken(String accountId, String password) async {
@@ -45,15 +45,14 @@ class TransactionModel {
 
   makePayment(CustomerModel customer) async {
     NetworkHelper networkHelper = NetworkHelper();
-    await networkHelper.postIntraTransaction(customer, this);
+    await networkHelper.postInterTransaction(this);
   }
 
   generateQr(CustomerModel customer, String qrData) async {
     // when generating QR, QR data is amount passed by user.
     NetworkHelper networkHelper = NetworkHelper();
     var qrString = await networkHelper.getQrString(customer, qrData);
-    // TODO UNCOMMENT LINE
-    // return qrString["qr_code"];
-    return "00020126580014br.gov.bcb.pix0136123e4567-e12b-12d1-a456-4266554400005204000053039865802BR5913Fulano de Tal6008BRASILIA62070503***63041D3D";
+    return qrString["qr_code"];
+    // return "00020126580014br.gov.bcb.pix0136123e4567-e12b-12d1-a456-4266554400005204000053039865802BR5913Fulano de Tal6008BRASILIA62070503***63041D3D";
   }
 }

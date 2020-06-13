@@ -22,7 +22,9 @@ class QrParsing {
     TransactionModel transactionInfo = TransactionModel();
     Map accountId = calculatefield(trimmedData);
     transactionInfo.creditorAccountId = accountId["fieldData"];
-    Map mcc = calculatefield(accountId["newString"]);
+    Map additionalInfo = calculatefield(accountId["newString"]);
+    transactionInfo.additionalInfo = additionalInfo["fieldData"];
+    Map mcc = calculatefield(additionalInfo["newString"]);
     Map currency = calculatefield(mcc["newString"]);
     switch (calculatefield(currency["newString"])["field"]) {
       case "58":
@@ -32,7 +34,6 @@ class QrParsing {
           transactionInfo.merchantName = customerName["fieldData"];
           Map city = calculatefield(customerName["newString"]);
           Map additionalData = calculatefield(city["newString"]);
-          transactionInfo.txId = additionalData["fieldData"];
           Map txId = calculatefield(additionalData["fieldData"]);
           transactionInfo.txId = txId["fieldData"];
         }
@@ -40,18 +41,17 @@ class QrParsing {
       default:
         {
           Map amount = calculatefield(currency["newString"]);
-          transactionInfo.amount = double.parse(amount["filedData"]);
+          transactionInfo.amount = amount["fieldData"];
           Map countryCode = calculatefield(amount["newString"]);
           Map customerName = calculatefield(countryCode["newString"]);
           Map city = calculatefield(customerName["newString"]);
+          transactionInfo.merchantName = customerName["fieldData"];
           Map additionalData = calculatefield(city["newString"]);
-          transactionInfo.txId = additionalData["fieldData"];
           Map txId = calculatefield(additionalData["fieldData"]);
           transactionInfo.txId = txId["fieldData"];
         }
         break;
     }
-
     return transactionInfo;
   }
 }
