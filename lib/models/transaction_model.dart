@@ -45,7 +45,7 @@ class TransactionModel {
 
   makePayment(CustomerModel customer) async {
     NetworkHelper networkHelper = NetworkHelper();
-    await networkHelper.postInterTransaction(this);
+    await networkHelper.postInterTransaction(customer, this);
   }
 
   generateQr(CustomerModel customer, String qrData) async {

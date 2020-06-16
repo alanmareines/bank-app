@@ -174,16 +174,16 @@ class NetworkHelper {
     }
   }
 
-  Future postInterTransaction(TransactionModel transaction) async {
-    String token = await getPspToken();
+  Future postInterTransaction(
+      CustomerModel customer, TransactionModel transaction) async {
     http.Response response = await http.post(
-      'https://api.linapay.io/v1/transfers/sending',
+      'https://api.linapay.io/v1/psp/customers/inter-transfers',
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'authorization': 'Bearer $token',
+        'authorization': 'Bearer ${customer.token}',
       },
       body: jsonEncode({
-        "sending": {
+        "inter": {
           "message_id": transaction.txId,
           "instructed_agent_id": "instructed_agent_id-0001",
           "instructing_agent_id": "instructing_agent_id-0001",
