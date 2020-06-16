@@ -5,7 +5,8 @@ import 'package:banking_app/components/service.dart';
 import 'package:banking_app/constants.dart';
 import 'package:banking_app/models/customer_model.dart';
 import 'package:banking_app/models/transaction_model.dart';
-
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
 
 class TransactionScreen extends StatelessWidget {
@@ -57,7 +58,7 @@ class TransactionScreen extends StatelessWidget {
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.only(
-                            top: 25.0, left: 15.0, right: 15.0, bottom: 5.0),
+                            top: 25.0, left: 15.0, right: 15.0, bottom: 0.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -79,50 +80,7 @@ class TransactionScreen extends StatelessWidget {
                         indent: 20.0,
                         endIndent: 20.0,
                       ),
-                      Column(
-                        children: <Widget>[
-                          Transaction(
-                              counterParty: "Wellington Barbosa",
-                              amount: "100,00 R\$",
-                              date: "14/03/2020"),
-                          Transaction(
-                              counterParty: "Márcio Castro",
-                              amount: "-120,00 R\$",
-                              date: "17/02/2020"),
-                          Transaction(
-                              counterParty: "Murilo Rabusky",
-                              amount: "2.309,00 R\$",
-                              date: "29/01/2020"),
-                          Transaction(
-                              counterParty: "Wellington Barbosa",
-                              amount: "-132,23 R\$",
-                              date: "26/01/2020"),
-                          Transaction(
-                              counterParty: "Márcio Castro",
-                              amount: "29,00 R\$",
-                              date: "20/01/2020"),
-                          Transaction(
-                              counterParty: "Liliane Dutra",
-                              amount: "100,00 R\$",
-                              date: "14/03/2020"),
-                          Transaction(
-                              counterParty: "Marcos Guirro",
-                              amount: "-120,00 R\$",
-                              date: "17/02/2020"),
-                          Transaction(
-                              counterParty: "Edsandro Rodrigues",
-                              amount: "2.309,00 R\$",
-                              date: "29/01/2020"),
-                          Transaction(
-                              counterParty: "Wellington Barbosa",
-                              amount: "-132,23 R\$",
-                              date: "26/01/2020"),
-                          Transaction(
-                              counterParty: "Márcio Castro",
-                              amount: "29,00 R\$",
-                              date: "20/01/2020"),
-                        ],
-                      ),
+                      transactionsWidget(customer.accountId),
                     ],
                   ),
                 ),
@@ -139,33 +97,60 @@ class TransactionScreen extends StatelessWidget {
   Future getTransactions() async {
     var transactionList =
         await TransactionModel().getCustomerTransactions(customer.token);
-    print(transactionList);
     return transactionList;
   }
 
   //Building a LIST VIEW for transactions fetched in API
 
-  Widget transactionsWidget() {
+  Widget transactionsWidget(String customer_account_id) {
     return FutureBuilder(
       builder: (context, transactionSnap) {
-        //IF Request went bad, return Container.
-        if (transactionSnap.connectionState == ConnectionState.none &&
-            transactionSnap.hasData == null) {
-          return Container(child: Text("transactionSnap is $transactionSnap"));
+        if (transactionSnap.connectionState == ConnectionState.done) {
+          //IF Request went bad, return Container.
+          if (transactionSnap.connectionState == ConnectionState.none ||
+              transactionSnap.hasData == null) {
+            return Container(
+                child: Text("transactionSnap is $transactionSnap"));
+          }
+          initializeDateFormatting('pt_BR', null);
+          return ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: ScrollPhysics(),
+            itemCount: transactionSnap.data.length,
+            itemBuilder: (context, index) {
+              var transaction = transactionSnap.data[index];
+              var debtor_account_id = transaction["debtor_account_id"];
+              var creditor_account_id = transaction["creditor_account_id"];
+              var counterParty;
+              var amount = transaction["amount"];
+
+              if (customer_account_id == debtor_account_id) {
+                counterParty = creditor_account_id;
+                amount = "- ${amount} R\$";
+              } else {
+                counterParty = debtor_account_id;
+                amount = "${amount} R\$";
+              }
+
+              String formattedDate = DateFormat('dd-MM-yyy – kk:mm:ss')
+                  .format(DateTime.parse(transaction["inserted_at"]).toLocal());
+              return Column(
+                children: <Widget>[
+                  Transaction(
+                      counterParty: counterParty,
+                      amount: amount,
+                      date: formattedDate),
+                ],
+              );
+            },
+          );
+        } else {
+          return Padding(
+              padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+              child: CircularProgressIndicator());
+          ;
         }
-        //If 200, then build LIST
-        return ListView.builder(
-          itemCount: transactionSnap.data.length,
-          itemBuilder: (context, index) {
-            Transaction transaction = transactionSnap.data[index];
-            print(transaction);
-            return Column(
-              children: <Widget>[
-                // Widget to display the list of project
-              ],
-            );
-          },
-        );
       },
       future: getTransactions(),
     );
