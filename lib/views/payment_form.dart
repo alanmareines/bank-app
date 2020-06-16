@@ -92,31 +92,32 @@ class _PaymentFormState extends State<PaymentForm> {
   readQRPayer(customer) async {
     var options = ScanOptions(autoEnableFlash: true);
 
-    // var result = await BarcodeScanner.scan(options: options);
-    var result =
-        "00020126450014br.gov.bcb.pix0119hendricks@hooli.com02005204000053039865405100.05802BR5921Wellington M. Barbosa6009São Paulo62400536d6979fca-3a0b-419c-9ec2-6ab89059bdde630424E9";
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return PaymentLoader(customer: customer, qrData: result, payer: true);
-        },
-      ),
-    );
+    var result = await BarcodeScanner.scan(options: options);
+    // var result =
+    //     "00020126450014br.gov.bcb.pix0119hendricks@hooli.com02005204000053039865405100.05802BR5921Wellington M. Barbosa6009São Paulo62400536d6979fca-3a0b-419c-9ec2-6ab89059bdde630424E9";
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) {
+    //       return PaymentLoader(customer: customer, qrData: result, payer: true);
+    //     },
+    //   ),
+    // );
 
     // REAL CODE
-    // if (result.rawContent == "") {
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) {
-    //         return PaymentLoader(customer: customer, qrData: result.rawContent);
-    //       },
-    //     ),
-    //   );
-    // } else {
-    //   print(result.type);
-    // }
+    if (result.rawContent != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return PaymentLoader(
+                customer: customer, qrData: result.rawContent, payer: true);
+          },
+        ),
+      );
+    } else {
+      print(result.type);
+    }
 
     //EXCEPTIONS
     // print(result.format); // The barcode format (as enum)

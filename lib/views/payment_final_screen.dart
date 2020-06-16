@@ -4,6 +4,7 @@ import 'package:banking_app/models/customer_model.dart';
 import 'package:banking_app/models/transaction_model.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
+import 'done.dart';
 
 class PaymentFinalScreen extends StatefulWidget {
   PaymentFinalScreen({@required this.customer, @required this.transaction});
@@ -30,6 +31,14 @@ class _PaymentFinalScreenState extends State<PaymentFinalScreen> {
         body: widget.transaction.amount == null
             ? enterAmount()
             : buildPaymentConfirmation());
+  }
+
+  makePaymentAndRenderTransition() async {
+    await widget.transaction.makePayment(widget.customer);
+    Navigator.push(
+        (context),
+        MaterialPageRoute(
+            builder: (context) => Done(customer: widget.customer)));
   }
 
   Center enterAmount() {
@@ -159,7 +168,7 @@ class _PaymentFinalScreenState extends State<PaymentFinalScreen> {
               ),
               PrimaryButton(
                   onTap: () {
-                    widget.transaction.makePayment(widget.customer);
+                    makePaymentAndRenderTransition();
                   },
                   buttonTitle: "OK")
             ],
