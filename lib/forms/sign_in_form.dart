@@ -70,6 +70,7 @@ class SignInFormState extends State<SignInForm> {
       child: Column(
         children: <Widget>[
           TextFormField(
+            keyboardType: TextInputType.emailAddress,
             controller: accountIdController,
             style: TextStyle(color: kPrimaryColor),
             decoration: const InputDecoration(

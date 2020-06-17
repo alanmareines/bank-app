@@ -36,8 +36,8 @@ class TransactionModel {
     return transactionsListData;
   }
 
-  buildTransaction(CustomerModel customer, String qrData) {
-    TransactionModel transactionInfo = QrParsing().parse(qrData);
+  buildTransaction(CustomerModel customer, String qrData) async {
+    TransactionModel transactionInfo = await QrParsing().parse(qrData);
     transactionInfo.debtorAccountId = customer.accountId;
     transactionInfo.dateTime = DateTime.now();
     return transactionInfo;

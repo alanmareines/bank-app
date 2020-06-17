@@ -1,6 +1,6 @@
 import 'package:banking_app/components/primary_button.dart';
 import 'package:banking_app/models/customer_model.dart';
-import 'package:banking_app/views/pix_pay.dart';
+import 'package:banking_app/views/screen_index.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -58,7 +58,7 @@ class _DoneState extends State<Done> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PixPayScreen(
+                            builder: (context) => ScreenIndex(
                               customer: widget.customer,
                             ),
                           ),

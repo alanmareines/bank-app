@@ -93,19 +93,7 @@ class _PaymentFormState extends State<PaymentForm> {
     var options = ScanOptions(autoEnableFlash: true);
 
     var result = await BarcodeScanner.scan(options: options);
-    // var result =
-    //     "00020126450014br.gov.bcb.pix0119hendricks@hooli.com02005204000053039865405100.05802BR5921Wellington M. Barbosa6009São Paulo62400536d6979fca-3a0b-419c-9ec2-6ab89059bdde630424E9";
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) {
-    //       return PaymentLoader(customer: customer, qrData: result, payer: true);
-    //     },
-    //   ),
-    // );
-
-    // REAL CODE
-    if (result.rawContent != null) {
+    if (result.format == BarcodeFormat.qr) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -116,14 +104,16 @@ class _PaymentFormState extends State<PaymentForm> {
         ),
       );
     } else {
-      print(result.type);
+      buildPayerScreen();
     }
-
-    //EXCEPTIONS
-    // print(result.format); // The barcode format (as enum)
-    // print(result
-    //     .formatNote); // If a unknown format was scanned this field contains a note
   }
+
+  //EXCEPTIONS
+  //   print(result.rawContent);
+  //   print(result.format); // The barcode format (as enum)
+  //   print(result
+  //       .formatNote); // If a unknown format was scanned this field contains a note
+  // }
 
   Form buildFormPayee() {
     return Form(
@@ -142,7 +132,7 @@ class _PaymentFormState extends State<PaymentForm> {
           Text("R\$", style: TextStyle(color: Colors.grey, fontSize: 14)),
           TextFormField(
             textAlign: TextAlign.center,
-            keyboardType: TextInputType.number,
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
             controller: payeeAmountController,
             style: TextStyle(color: kPrimaryColor, fontSize: 40),
             decoration: InputDecoration(

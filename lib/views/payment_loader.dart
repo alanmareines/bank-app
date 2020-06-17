@@ -21,6 +21,8 @@ class PaymentLoader extends StatefulWidget {
 }
 
 class _PaymentLoaderState extends State<PaymentLoader> {
+  final _paymentPayerKey = GlobalKey<FormState>();
+  final payerAmountController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -32,15 +34,68 @@ class _PaymentLoaderState extends State<PaymentLoader> {
     }
   }
 
+  void dispose() {
+    payerAmountController.dispose();
+    super.dispose();
+  }
+
   Future makePayment() async {
     var transaction = await TransactionModel()
         .buildTransaction(widget.customer, widget.qrData);
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return PaymentFinalScreen(
-        customer: widget.customer,
-        transaction: transaction,
-      );
-    }));
+    if (transaction.amount == null || transaction.amount == "") {
+      insertAmount(transaction);
+    } else {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return PaymentFinalScreen(
+            customer: widget.customer, transaction: transaction);
+      }));
+    }
+  }
+
+  insertAmount(transaction) {
+    Form(
+      key: _paymentPayerKey,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+            child: Text(
+              "Insira o valor a ser pago",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: kPrimaryColor, fontSize: 16),
+            ),
+          ),
+          Text("R\$", style: TextStyle(color: Colors.grey, fontSize: 14)),
+          TextFormField(
+            textAlign: TextAlign.center,
+            keyboardType: TextInputType.number,
+            controller: payerAmountController,
+            style: TextStyle(color: kPrimaryColor, fontSize: 40),
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(horizontal: 10)),
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Campo deve ser Preenchido';
+              }
+              return null;
+            },
+          ),
+          SizedBox(height: 20),
+          PrimaryButton(
+              onTap: () {
+                if (_paymentPayerKey.currentState.validate()) {
+                  transaction.amount = payerAmountController.text;
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return PaymentFinalScreen(
+                        customer: widget.customer, transaction: transaction);
+                  }));
+                }
+              },
+              buttonTitle: 'Confirmar Pagamento')
+        ],
+      ),
+    );
   }
 
   Future generateQr() async {
