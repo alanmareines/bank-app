@@ -55,6 +55,7 @@ class TransactionScreen extends StatelessWidget {
                           BorderRadius.vertical(top: Radius.circular(15.0)),
                       color: Colors.white),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.only(
@@ -127,10 +128,10 @@ class TransactionScreen extends StatelessWidget {
 
               if (customer_account_id == debtor_account_id) {
                 counterParty = creditor_account_id;
-                amount = "- ${amount} R\$";
+                amount = "- $amount R\$";
               } else {
                 counterParty = debtor_account_id;
-                amount = "${amount} R\$";
+                amount = "$amount R\$";
               }
 
               String formattedDate = DateFormat('dd-MM-yyy – kk:mm:ss')
@@ -149,7 +150,6 @@ class TransactionScreen extends StatelessWidget {
           return Padding(
               padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
               child: CircularProgressIndicator());
-          ;
         }
       },
       future: getTransactions(),

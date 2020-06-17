@@ -24,7 +24,7 @@ class _ScreenIndexState extends State<ScreenIndex> {
       HomeScreen(customer: widget.customer),
       TransactionScreen(customer: widget.customer),
       PixPayScreen(customer: widget.customer),
-      InfoScreen(),
+      InfoScreen(customer: widget.customer),
     ];
 
     return Scaffold(

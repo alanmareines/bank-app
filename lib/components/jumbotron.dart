@@ -49,7 +49,9 @@ class Jumbotron extends StatelessWidget {
                         children: <TextSpan>[
                           TextSpan(text: 'R\$ '),
                           TextSpan(
-                            text: accountBalance,
+                            text: double.parse(accountBalance)
+                                .toStringAsFixed(2)
+                                .replaceAll('.', ','),
                             style: TextStyle(
                                 fontSize: 30.0, fontWeight: FontWeight.w800),
                           )
